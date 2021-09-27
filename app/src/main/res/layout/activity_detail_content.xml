@@ -258,7 +258,7 @@
         android:id="@+id/relative_commentupload"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_above="@id/detailcontent_imageview_ad"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="17dp"
         android:layout_marginTop="15dp"
         android:layout_marginRight="17dp"
@@ -324,13 +324,13 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/detailcontent_imageview_ad"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_adexample" />
+<!--    <ImageView-->
+<!--        android:id="@+id/detailcontent_imageview_ad"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:src="@drawable/ic_adexample" />-->
 
 
 </RelativeLayout>

@@ -30,10 +30,7 @@ class LaunchActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.launchBtnAdminister.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
+
     }
 
     fun moveMainpage(user: FirebaseUser?) {

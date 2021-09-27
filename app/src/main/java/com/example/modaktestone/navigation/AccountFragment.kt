@@ -1,6 +1,5 @@
 package com.example.modaktestone.navigation
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.modaktestone.LoginActivity
-import com.example.modaktestone.MainActivity
 import com.example.modaktestone.databinding.FragmentAccountBinding
 import com.example.modaktestone.databinding.ItemContentBinding
 import com.example.modaktestone.navigation.account.*
+import com.example.modaktestone.navigation.administrator.UploadSlideActivity
 import com.example.modaktestone.navigation.model.ContentDTO
 import com.example.modaktestone.navigation.model.UserDTO
 import com.google.firebase.auth.FirebaseAuth
@@ -42,9 +41,6 @@ class AccountFragment : Fragment() {
         _binding = FragmentAccountBinding.inflate(inflater, container, false)
         val view = binding.root
 
-//        var view = LayoutInflater.from(activity).inflate(R.layout.fragment_account, container, false)
-//        return super.onCreateView(inflater, container, savedInstanceState)
-
         //초기화
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
@@ -59,10 +55,18 @@ class AccountFragment : Fragment() {
 
         //로그아웃 버튼 클릭
         binding.accountBtnLogout.setOnClickListener {
-            activity?.finish()
-            startActivity(Intent(activity, LaunchActivity::class.java))
-            clearToken(currentUserUid!!)
-            auth?.signOut()
+            if(currentUserUid == "IZfsrmb3a6epIASNo2dSHDon6HG3"){
+                activity?.finish()
+                startActivity(Intent(activity, LoginActivity::class.java))
+                clearToken(currentUserUid!!)
+                auth?.signOut()
+            } else {
+                activity?.finish()
+                startActivity(Intent(activity, LaunchActivity::class.java))
+                clearToken(currentUserUid!!)
+                auth?.signOut()
+            }
+
         }
 
         //각 버튼 클릭
@@ -82,8 +86,27 @@ class AccountFragment : Fragment() {
             var intent = Intent(v.context, NoticeActivity::class.java)
             startActivity(intent)
         }
+        binding.accountBtnShare.setOnClickListener {
+            val msg = Intent(Intent.ACTION_SEND)
+
+            msg.addCategory(Intent.CATEGORY_DEFAULT)
+            msg.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.example.modaktestone.navigation")
+            msg.putExtra(Intent.EXTRA_TITLE, "제목")
+            msg.type = "text/plain"
+            startActivity(Intent.createChooser(msg, "앱을 선택해 주세요"))
+        }
         binding.accountBtnInquiry.setOnClickListener { v ->
             var intent = Intent(v.context, MyInquiryActivity::class.java)
+            startActivity(intent)
+        }
+
+        //관리자일 때만 관리자모드 창 띄우게 하기
+        if(currentUserUid != "IZfsrmb3a6epIASNo2dSHDon6HG3"){
+            binding.accountLayoutAdministrator.visibility = View.GONE
+        }
+
+        binding.accountBtnSlide.setOnClickListener { v ->
+            var intent = Intent(v.context, UploadSlideActivity::class.java)
             startActivity(intent)
         }
 

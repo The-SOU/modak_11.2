@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.modaktestone.databinding.ActivityBoardcontentBinding
@@ -43,6 +44,9 @@ class WelfareNoticeActivity : AppCompatActivity() {
         ab.setDisplayShowTitleEnabled(false)
         ab.setDisplayShowCustomEnabled(true)
         ab.setDisplayHomeAsUpEnabled(true)
+
+        //글쓰기 버튼 비활성화
+        binding.welfareNoticeBtnUpload.visibility = View.GONE
 
         //글쓰기 버튼 클릭할 때
         binding.welfareNoticeBtnUpload.setOnClickListener { v ->

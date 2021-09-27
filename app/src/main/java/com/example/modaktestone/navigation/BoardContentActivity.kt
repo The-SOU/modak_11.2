@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.Toast
@@ -81,12 +82,24 @@ class BoardContentActivity : AppCompatActivity() {
         ab.setDisplayHomeAsUpEnabled(true)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.actionbar, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
                 finish()
                 true
             }
+            //검색창 구현 예정
+//            R.id.action_btn1 -> {
+//                var intent = Intent(this, SearchViewActivity::class.java)
+//                startActivity(intent)
+//                finish()
+//                true
+//            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -167,6 +180,9 @@ class BoardContentActivity : AppCompatActivity() {
                     intent.putExtra("destinationUsername", "익명")
                 } else {
                     intent.putExtra("destinationUsername", contentDTOs[position].userName)
+                }
+                if(contentDTOs[position].profileUrl != null){
+                    intent.putExtra("destinationProfile", contentDTOs[position].profileUrl)
                 }
                 intent.putExtra("destinationTitle", contentDTOs[position].title)
                 intent.putExtra("destinationExplain", contentDTOs[position].explain)

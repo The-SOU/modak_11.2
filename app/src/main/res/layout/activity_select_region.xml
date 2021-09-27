@@ -120,7 +120,7 @@
             android:layout_marginRight="20dp"
             android:text="다음"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="@dimen/fontsize_button"
             android:textColor="@color/white"
             android:background="@drawable/layout_dialog_radius"
             android:fontFamily="@font/spoqahansansneo_bold"

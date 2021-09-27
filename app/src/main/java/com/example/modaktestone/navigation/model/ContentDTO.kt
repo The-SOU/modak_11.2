@@ -4,6 +4,7 @@ data class ContentDTO(
     var uid: String? = null,
     var userName: String? = null,
     var region: String? = null,
+    var profileUrl: String? = null,
     var contentCategory: String? = null,
     var title: String? = null,
     var explain: String? = null,

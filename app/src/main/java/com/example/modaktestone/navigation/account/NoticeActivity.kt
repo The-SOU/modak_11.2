@@ -51,6 +51,13 @@ class NoticeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        if(uid == "IZfsrmb3a6epIASNo2dSHDon6HG3"){
+            binding.noticeBtnUpload.visibility = View.VISIBLE
+        } else {
+            binding.noticeBtnUpload.visibility = View.GONE
+        }
+
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

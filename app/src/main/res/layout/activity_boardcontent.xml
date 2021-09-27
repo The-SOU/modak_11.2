@@ -78,7 +78,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="글 쓰기"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/fontsize_button"
                     android:fontFamily="@font/spoqahansansneo_bold" />
 
             </LinearLayout>

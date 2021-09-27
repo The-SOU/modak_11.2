@@ -78,21 +78,21 @@ class EditContentActivity : AppCompatActivity() {
         }
 
         //익명 버튼 클릭시
-        binding.addcontentLinearAnonymity.setOnClickListener {
-            if (anonymityDTO.anonymity.containsKey(auth?.currentUser?.uid)) {
-                anonymityDTO.anonymity.remove(auth?.currentUser?.uid)
-                binding.addcontentImageviewAnonymity.setImageResource(R.drawable.ic_unanonymity)
-                binding.addcontentTvAnonymity.setTextColor(Color.parseColor("#919191"))
-                binding.addcontentTvAnonymity.setTypeface(null, Typeface.NORMAL)
-                println("anonymity delete complete")
-            } else {
-                anonymityDTO.anonymity[auth?.currentUser?.uid!!] = true
-                binding.addcontentImageviewAnonymity.setImageResource(R.drawable.ic_anonymity)
-                binding.addcontentTvAnonymity.setTextColor(Color.BLACK)
-                binding.addcontentTvAnonymity.setTypeface(null, Typeface.BOLD)
-                println("anonymity add complete")
-            }
-        }
+//        binding.addcontentLinearAnonymity.setOnClickListener {
+//            if (anonymityDTO.anonymity.containsKey(auth?.currentUser?.uid)) {
+//                anonymityDTO.anonymity.remove(auth?.currentUser?.uid)
+//                binding.addcontentImageviewAnonymity.setImageResource(R.drawable.ic_unanonymity)
+//                binding.addcontentTvAnonymity.setTextColor(Color.parseColor("#919191"))
+//                binding.addcontentTvAnonymity.setTypeface(null, Typeface.NORMAL)
+//                println("anonymity delete complete")
+//            } else {
+//                anonymityDTO.anonymity[auth?.currentUser?.uid!!] = true
+//                binding.addcontentImageviewAnonymity.setImageResource(R.drawable.ic_anonymity)
+//                binding.addcontentTvAnonymity.setTextColor(Color.BLACK)
+//                binding.addcontentTvAnonymity.setTypeface(null, Typeface.BOLD)
+//                println("anonymity add complete")
+//            }
+//        }
 
         //키보드 숨기기
         binding.layout.setOnClickListener {

@@ -32,9 +32,11 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
                 android:id="@+id/detailview_layout_box"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:background="@drawable/layout_detailview_background"
                 android:orientation="vertical">
@@ -129,6 +131,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/secondlayout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginBottom="10dp"
@@ -225,12 +228,13 @@
                 android:layout_below="@id/detailview_layout_box"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:backgroundTint="@color/dots_color"
                 android:background="@drawable/layout_ad_background">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_adexample2" />
+                    android:src="@drawable/ad_modak" />
             </LinearLayout>
 
             <LinearLayout
@@ -300,126 +304,126 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/detailview_layout_hotcontent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/detailview_layout_repeatboard"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/layout_detailview_background"
-                android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/detailview_layout_hotcontent"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/detailview_layout_repeatboard"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:background="@drawable/layout_detailview_background"-->
+<!--                android:orientation="vertical">-->
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp">
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="70dp">-->
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="center_vertical">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_alignParentLeft="true"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:gravity="center_vertical">-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="실시간 인기 글"
-                            android:textColor="@color/black"
-                            android:textSize="30sp"
-                            android:fontFamily="@font/spoqahansansneo_bold" />
-
-
-                    </LinearLayout>
-
-                </RelativeLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/detailview_recyclerview_hotcontent"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="20dp">
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="실시간 인기 글"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textSize="30sp"-->
+<!--                            android:fontFamily="@font/spoqahansansneo_bold" />-->
 
 
-                </androidx.recyclerview.widget.RecyclerView>
+<!--                    </LinearLayout>-->
+
+<!--                </RelativeLayout>-->
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/detailview_recyclerview_hotcontent"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:layout_marginBottom="20dp">-->
 
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/detailview_layout_recommendation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/detailview_layout_hotcontent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/layout_detailview_background"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="추천 정보"
-                            android:textColor="@color/black"
-                            android:textSize="30sp"
-                            android:fontFamily="@font/spoqahansansneo_bold" />
-                    </LinearLayout>
+<!--                </androidx.recyclerview.widget.RecyclerView>-->
 
 
-                </RelativeLayout>
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/detailview_layout_recommendation"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/detailview_layout_hotcontent"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:background="@drawable/layout_detailview_background"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="70dp">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_alignParentLeft="true"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:gravity="center_vertical">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="추천 정보"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textSize="30sp"-->
+<!--                            android:fontFamily="@font/spoqahansansneo_bold" />-->
+<!--                    </LinearLayout>-->
 
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="420dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-                        android:id="@+id/dots_indicator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:dotsColor="@color/whitegrey"
-                        app:dotsCornerRadius="8dp"
-                        app:dotsSize="16dp"
-                        app:dotsSpacing="4dp"
-                        app:dotsWidthFactor="2.5"
-                        app:selectedDotColor="@color/dots_color"
-
-                        />
-
-                </LinearLayout>
+<!--                </RelativeLayout>-->
 
 
-            </LinearLayout>
+<!--                <androidx.viewpager2.widget.ViewPager2-->
+<!--                    android:id="@+id/viewPager"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="420dp" />-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_marginBottom="20dp"-->
+<!--                    android:gravity="center"-->
+<!--                    android:orientation="horizontal">-->
+
+<!--                    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator-->
+<!--                        android:id="@+id/dots_indicator"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        app:dotsColor="@color/whitegrey"-->
+<!--                        app:dotsCornerRadius="8dp"-->
+<!--                        app:dotsSize="16dp"-->
+<!--                        app:dotsSpacing="4dp"-->
+<!--                        app:dotsWidthFactor="2.5"-->
+<!--                        app:selectedDotColor="@color/dots_color"-->
+
+<!--                        />-->
+
+<!--                </LinearLayout>-->
+
+
+<!--            </LinearLayout>-->
 
             <LinearLayout
                 android:id="@+id/detailview_layout_bestcontent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/detailview_layout_recommendation"
+                android:layout_below="@+id/detailview_layout_repeatboard"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
@@ -469,7 +473,7 @@
                 android:id="@+id/detailview_layout_society"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/detailview_layout_bestcontent"
+                android:layout_below="@+id/detailview_layout_event"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
@@ -569,7 +573,7 @@
                 android:id="@+id/detailview_layout_event"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/detailview_layout_club"
+                android:layout_below="@+id/detailview_layout_bestcontent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
@@ -600,7 +604,7 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewPager_second"
                     android:layout_width="match_parent"
-                    android:layout_height="420dp" />
+                    android:layout_height="wrap_content" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -632,7 +636,7 @@
                 android:id="@+id/detailview_layout_welfare"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/detailview_layout_event"
+                android:layout_below="@+id/detailview_layout_club"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
@@ -665,7 +669,7 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewPager_third"
                     android:layout_width="match_parent"
-                    android:layout_height="420dp" />
+                    android:layout_height="wrap_content" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -5,4 +5,8 @@
     <dimen name="offset">20dp</dimen>
     <dimen name="pageMarginAndOffset">40dp</dimen>
     <dimen name="frameSize">320dp</dimen>
+
+    <!-- 글씨 사이즈 -->
+    <dimen name="fontsize_button">22sp</dimen>
+    <dimen name="fontsize_actionbar">30sp</dimen>
 </resources>

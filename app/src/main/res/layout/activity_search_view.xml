@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".navigation.SearchViewActivity"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/pencil"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_pencil_green">
+
+
+        </ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_dialog_radius"
+        android:layout_toLeftOf="@+id/cancel"
+        android:backgroundTint="#D5D4D4"
+        android:layout_toRightOf="@id/pencil"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
+
+
+
+        <EditText
+            android:id="@+id/search_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="글 제목, 내용"
+            android:lines="1"
+            android:textSize="25sp"
+            android:fontFamily="@font/spoqahansansneo_bold"/>
+
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:text="취소"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:fontFamily="@font/spoqahansansneo_bold" />
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_recyclerview"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

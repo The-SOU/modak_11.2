@@ -35,7 +35,7 @@
             android:layout_weight="1"
             android:text="신고하기"
            android:fontFamily="@font/spoqahansansneo_bold"
-            android:textSize="18sp"
+            android:textSize="@dimen/fontsize_button"
             android:textColor="@color/white"
             android:background="@drawable/layout_dialog_radius"
             android:backgroundTint="@color/dots_color"/>
@@ -47,7 +47,7 @@
             android:layout_weight="1"
             android:text="취소"
             android:fontFamily="@font/spoqahansansneo_bold"
-            android:textSize="18sp"
+            android:textSize="@dimen/fontsize_button"
             android:background="@drawable/layout_dialog_radius" />
 
     </LinearLayout>

@@ -75,6 +75,6 @@
         android:fontFamily="@font/spoqahansansneo_bold"
         android:text="시작하기"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="@dimen/fontsize_button" />
 
 </RelativeLayout>

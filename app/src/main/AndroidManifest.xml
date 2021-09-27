@@ -8,16 +8,18 @@
     <application
         android:name=".kakao.GlobalApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_final"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_final_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".navigation.administrator.UploadSlideActivity"></activity>
+        <activity android:name=".navigation.SearchTestActivity" />
+        <activity android:name=".navigation.SearchViewActivity" />
         <activity
             android:name=".navigation.CreateNameActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".navigation.WelfareNoticeActivity"
             android:screenOrientation="portrait" />

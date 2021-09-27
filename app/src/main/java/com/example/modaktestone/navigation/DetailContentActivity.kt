@@ -44,6 +44,7 @@ class DetailContentActivity : AppCompatActivity() {
     var destinationUid: String? = null
     var contentUid: String? = null
     var imageUrl: String? = null
+    var profileUrl: String? = null
 
     var editTitle: String? = null
     var editExplain: String? = null
@@ -73,9 +74,12 @@ class DetailContentActivity : AppCompatActivity() {
         destinationTitle = intent.getStringExtra("destinationTitle")
         destinationExplain = intent.getStringExtra("destinationExplain")
         imageUrl = intent.getStringExtra("destinationImage")
+        profileUrl = intent.getStringExtra("destinationProfile")
 
         //글쓴이 프로필 띄우기
-        getProfileImage()
+        if(profileUrl != null){
+            Glide.with(this).load(intent.getStringExtra("destinationProfile")).apply(RequestOptions().circleCrop()).into(binding.detailcontentImageviewProfile)
+        }
 
         //컨텐츠 내용 띄우기
         binding.detailcontentTextviewUsername.text = intent.getStringExtra("destinationUsername")
@@ -155,6 +159,7 @@ class DetailContentActivity : AppCompatActivity() {
         }
 
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
@@ -603,19 +608,22 @@ class DetailContentActivity : AppCompatActivity() {
         }
     }
 
-    fun getProfileImage() {
-        firestore?.collection("profileImages")?.document(uid!!)
-            ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
-                if (documentSnapshot == null) return@addSnapshotListener
-                if (documentSnapshot.data != null) {
-                    var url = documentSnapshot?.data!!["image"]
-                    Glide.with(
-                        this
-                    ).load(url).apply(RequestOptions().circleCrop())
-                        .into(binding.detailcontentImageviewProfile)
-                }
-            }
-    }
+//    fun getProfileImage() {
+//        firestore?.collection("users")?.document(uid!!)
+//            ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
+//                if (documentSnapshot == null) return@addSnapshotListener
+//                if (documentSnapshot?.data!!["profileUrl"] != null) {
+//                    var url = documentSnapshot?.data!!["profileUrl"]
+//                    if(this!=null){
+//                        Glide.with(
+//                            this
+//                        ).load(url).apply(RequestOptions().circleCrop())
+//                            .into(binding.detailcontentImageviewProfile)
+//                    }
+//
+//                }
+//            }
+//    }
 
 //    익명되는 코멘트 업로드
 //    fun commentUploads(anonymity: ContentDTO.Comment) {

@@ -1,50 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".navigation.LaunchActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".navigation.LaunchActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/dots_color">
+        android:background="@color/dots_color"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/launch_btn_administer"
             android:layout_width="200dp"
-            android:layout_height="130dp"
-            android:src="@drawable/img_logo_talk"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/img_logo_talk" />
 
         <ImageView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:src="@drawable/img_login_white"
-            android:layout_gravity="center_horizontal"/>
-
-        <Button
-            android:id="@+id/launch_btn"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:text="모닥 시작하기"
-            android:fontFamily="@font/spoqahansansneo_bold"
-            android:textSize="20sp"
-            android:layout_marginTop="40dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/dots_color"
-            android:background="@drawable/layout_dialog_radius"/>
-
-
-
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/img_launch_background" />
 
 
     </LinearLayout>
 
+    <Button
 
-</LinearLayout>
+        android:id="@+id/launch_btn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/layout_dialog_radius"
+        android:fontFamily="@font/spoqahansansneo_bold"
+        android:text="모닥 시작하기"
+        android:textColor="@color/dots_color"
+        android:textSize="@dimen/fontsize_button" />
+
+
+</RelativeLayout>

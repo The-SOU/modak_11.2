@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="전화번호 인증"
-            android:textSize="30sp"
+            android:textSize="@dimen/fontsize_actionbar"
             android:fontFamily="@font/spoqahansansneo_bold"
             android:textColor="@color/black"/>
 
@@ -79,7 +79,7 @@
             android:text="인증문자 받기"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/spoqahansansneo_bold"
-            android:textSize="20sp"
+            android:textSize="@dimen/fontsize_button"
             android:textColor="@color/white"
             android:background="@drawable/layout_dialog_radius"
             android:backgroundTint="@color/dots_color" />
@@ -166,7 +166,7 @@
             android:text="인증번호 확인"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/spoqahansansneo_bold"
-            android:textSize="20sp"
+            android:textSize="@dimen/fontsize_button"
             android:textColor="@color/white"
             android:background="@drawable/layout_dialog_radius"
             android:backgroundTint="@color/dots_color" />

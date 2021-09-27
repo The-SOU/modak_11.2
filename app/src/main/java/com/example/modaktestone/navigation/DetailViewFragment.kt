@@ -11,13 +11,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.modaktestone.MainActivity
 import com.example.modaktestone.R
-import com.example.modaktestone.databinding.FragmentDetailBinding
-import com.example.modaktestone.databinding.ItemBestcontentBinding
-import com.example.modaktestone.databinding.ItemPagerBinding
-import com.example.modaktestone.databinding.ItemRepeatboardBinding
+import com.example.modaktestone.databinding.*
+import com.example.modaktestone.navigation.account.MyInquiryActivity
 import com.example.modaktestone.navigation.model.ContentDTO
+import com.example.modaktestone.navigation.model.SlideDTO
 import com.example.modaktestone.navigation.model.UserDTO
 import com.example.modaktestone.navigation.recyclerView.*
 import com.google.firebase.auth.FirebaseAuth
@@ -30,8 +31,12 @@ import java.text.SimpleDateFormat
 
 
 class DetailViewFragment : Fragment() {
+
+
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
+
+    private val TAG = "DetailView_Tag"
 
     var auth: FirebaseAuth? = null
     var firestore: FirebaseFirestore? = null
@@ -40,13 +45,11 @@ class DetailViewFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 //초기화
         firestore = FirebaseFirestore.getInstance()
         currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+        println("what region2" + region)
         getMyRegion()
-//        region = arguments?.getString("userRegion")
-
 
     }
 
@@ -58,6 +61,8 @@ class DetailViewFragment : Fragment() {
     ): View? {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        getMyRegion()
 
         binding.boardcontentTextviewMyregion.text = arguments?.getString("userRegion")
 
@@ -72,6 +77,8 @@ class DetailViewFragment : Fragment() {
 
 
         }
+
+        println("what region3" + region)
         //자주찾는 게시판 어뎁터와 매니저
         binding.detailviewRecyclerviewRepeatboard.adapter = RepeatboardRecyclerViewAdapter()
         binding.detailviewRecyclerviewRepeatboard.layoutManager = LinearLayoutManager(this.context)
@@ -80,9 +87,9 @@ class DetailViewFragment : Fragment() {
         binding.detailviewRecyclerviewBestcontent.adapter = BestContentRecyclerViewAdapter()
         binding.detailviewRecyclerviewBestcontent.layoutManager = LinearLayoutManager(this.context)
 
-        //실시간 인기글 게시판
-        binding.detailviewRecyclerviewHotcontent.adapter = HotContentRecyclerViewAdapter()
-        binding.detailviewRecyclerviewHotcontent.layoutManager = LinearLayoutManager(this.context)
+//        //실시간 인기글 게시판
+//        binding.detailviewRecyclerviewHotcontent.adapter = HotContentRecyclerViewAdapter()
+//        binding.detailviewRecyclerviewHotcontent.layoutManager = LinearLayoutManager(this.context)
 
         //지역 내 정보 어댑터와 매니저
         binding.detailviewRecyclerviewSociety.adapter = DetailSocietyRecyclerViewAdapter()
@@ -93,20 +100,30 @@ class DetailViewFragment : Fragment() {
         binding.detailviewRecyclerviewClub.layoutManager = LinearLayoutManager(this.context)
 
         //추천정보 뷰페이저 어댑터
-        binding.viewPager.adapter = ViewPagerAdapter()
-        binding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+//        binding.viewPager.adapter = ViewPagerAdapter()
+//        binding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+//
+//        //뷰페이저에 동그라미 인디케이터 추가
+//        binding.dotsIndicator.setViewPager2(binding.viewPager)
 
-        //뷰페이저에 동그라미 인디케이터 추가
-        binding.dotsIndicator.setViewPager2(binding.viewPager)
+        firestore?.collection("users")?.document(currentUserUid!!)
+            ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
+                if (documentSnapshot == null) return@addSnapshotListener
+                var userDTO = documentSnapshot.toObject(UserDTO::class.java)
+                var item = userDTO?.region
+                println(TAG + 1 + item)
+                binding.viewPagerSecond.adapter = ViewPagerSecondAdapter(item)
+                binding.viewPagerSecond.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+                binding.dotsIndicatorSecond.setViewPager2(binding.viewPagerSecond)
 
-        binding.viewPagerSecond.adapter =
-            ViewPagerSecondAdapter()
-        binding.viewPagerSecond.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        binding.dotsIndicatorSecond.setViewPager2(binding.viewPagerSecond)
+                binding.viewPagerThird.adapter = ViewPagerThirdAdapter(item)
+                binding.viewPagerThird.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+                binding.dotsIndicatorThird.setViewPager2(binding.viewPagerThird)
+            }
 
-        binding.viewPagerThird.adapter = ViewPagerThirdAdapter()
-        binding.viewPagerThird.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        binding.dotsIndicatorThird.setViewPager2(binding.viewPagerThird)
+
+
+
 
 
         //상위 4개 버튼 모음
@@ -116,21 +133,32 @@ class DetailViewFragment : Fragment() {
         }
 
         binding.detailviewBtnNotice.setOnClickListener { v ->
-            var intent = Intent(v.context, BoardContentActivity::class.java)
+            var intent = Intent(v.context, WelfareNoticeActivity::class.java)
             intent.putExtra("destinationCategory", "복지관 공지사항")
             startActivity(intent)
         }
+
+        binding.detailviewBtnSuggestion.setOnClickListener { v ->
+            var intent = Intent(v.context, MyInquiryActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.secondlayout.visibility = View.GONE
 
         return view
     }
 
     fun getMyRegion() {
+
         firestore?.collection("users")?.document(currentUserUid!!)
             ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
                 if (documentSnapshot == null) return@addSnapshotListener
                 var regionDTO = documentSnapshot.toObject(UserDTO::class.java)
                 binding.boardcontentTextviewMyregion.text = regionDTO?.region
+                println("what region1" + region)
+
             }
+
     }
 
 
@@ -139,16 +167,6 @@ class DetailViewFragment : Fragment() {
 
         var boardDTO: List<String> =
             listOf("자유게시판", "건강게시판", "재취업게시판", "트로트게시판")
-
-
-        init {
-            firestore?.collection("users")?.document(currentUserUid!!)
-                ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
-                    if (documentSnapshot == null) return@addSnapshotListener
-                    var regionDTO = documentSnapshot.toObject(UserDTO::class.java)
-                    region = regionDTO?.region
-                }
-        }
 
 
         inner class CustomViewHolder(val binding: ItemRepeatboardBinding) :
@@ -173,8 +191,8 @@ class DetailViewFragment : Fragment() {
                 "자유게시판" -> {
                     var contentDTOs: ArrayList<ContentDTO> = arrayListOf()
 
-                    firestore?.collection("contents")
-                        ?.whereEqualTo("contentCategory", "자유게시판")
+                    firestore?.collection("contents")?.whereEqualTo("contentCategory", "자유게시판")
+                        ?.orderBy("timestamp", Query.Direction.DESCENDING)?.limit(1)
                         ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
                             contentDTOs.clear()
                             if (documentSnapshot == null) return@addSnapshotListener
@@ -182,21 +200,16 @@ class DetailViewFragment : Fragment() {
                                 var item = snapshot.toObject(ContentDTO::class.java)
                                 contentDTOs.add(item!!)
                             }
-                            if (contentDTOs.size != 0) {
-                                holder.binding.itemRepeatboardTvBoardcontent.text =
-                                    contentDTOs[0].explain.toString()
-
-                            } else {
-                                println(contentDTOs.size)
-                            }
-
+                            holder.binding.itemRepeatboardTvBoardcontent.text =
+                                contentDTOs[0].explain.toString()
                         }
+
                 }
                 "건강게시판" -> {
                     var contentDTOs: ArrayList<ContentDTO> = arrayListOf()
 
-                    firestore?.collection("contents")
-                        ?.whereEqualTo("contentCategory", "건강게시판")
+                    firestore?.collection("contents")?.whereEqualTo("contentCategory", "건강게시판")
+                        ?.orderBy("timestamp", Query.Direction.DESCENDING)?.limit(1)
                         ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
                             contentDTOs.clear()
                             if (documentSnapshot == null) return@addSnapshotListener
@@ -204,21 +217,15 @@ class DetailViewFragment : Fragment() {
                                 var item = snapshot.toObject(ContentDTO::class.java)
                                 contentDTOs.add(item!!)
                             }
-                            if (contentDTOs.size != 0) {
-                                holder.binding.itemRepeatboardTvBoardcontent.text =
-                                    contentDTOs[0].explain.toString()
-
-                            } else {
-                                println(contentDTOs.size)
-                            }
-
+                            holder.binding.itemRepeatboardTvBoardcontent.text =
+                                contentDTOs[0].explain.toString()
                         }
                 }
                 "트로트게시판" -> {
                     var contentDTOs: ArrayList<ContentDTO> = arrayListOf()
 
-                    firestore?.collection("contents")
-                        ?.whereEqualTo("contentCategory", "트로트게시판")
+                    firestore?.collection("contents")?.whereEqualTo("contentCategory", "트로트게시판")
+                        ?.orderBy("timestamp", Query.Direction.DESCENDING)?.limit(1)
                         ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
                             contentDTOs.clear()
                             if (documentSnapshot == null) return@addSnapshotListener
@@ -226,21 +233,15 @@ class DetailViewFragment : Fragment() {
                                 var item = snapshot.toObject(ContentDTO::class.java)
                                 contentDTOs.add(item!!)
                             }
-                            if (contentDTOs.size != 0) {
-                                holder.binding.itemRepeatboardTvBoardcontent.text =
-                                    contentDTOs[0].explain.toString()
-
-                            } else {
-                                println(contentDTOs.size)
-                            }
-
+                            holder.binding.itemRepeatboardTvBoardcontent.text =
+                                contentDTOs[0].explain.toString()
                         }
                 }
                 "재취업게시판" -> {
                     var contentDTOs: ArrayList<ContentDTO> = arrayListOf()
 
-                    firestore?.collection("contents")
-                        ?.whereEqualTo("contentCategory", "재취업게시판")
+                    firestore?.collection("contents")?.whereEqualTo("contentCategory", "재취업게시판")
+                        ?.orderBy("timestamp", Query.Direction.DESCENDING)?.limit(1)
                         ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
                             contentDTOs.clear()
                             if (documentSnapshot == null) return@addSnapshotListener
@@ -248,14 +249,8 @@ class DetailViewFragment : Fragment() {
                                 var item = snapshot.toObject(ContentDTO::class.java)
                                 contentDTOs.add(item!!)
                             }
-                            if (contentDTOs.size != 0) {
-                                holder.binding.itemRepeatboardTvBoardcontent.text =
-                                    contentDTOs[0].explain.toString()
-
-                            } else {
-                                println(contentDTOs.size)
-                            }
-
+                            holder.binding.itemRepeatboardTvBoardcontent.text =
+                                contentDTOs[0].explain.toString()
                         }
                 }
             }
@@ -273,98 +268,95 @@ class DetailViewFragment : Fragment() {
         }
     }
 
-    inner class HotContentRecyclerViewAdapter :
-        RecyclerView.Adapter<HotContentRecyclerViewAdapter.CustomViewHolder>() {
-        var contentDTOs: ArrayList<ContentDTO> = arrayListOf()
-
-        var contentUidList: ArrayList<String> = arrayListOf()
-
-        init {
-            firestore?.collection("contents")?.orderBy("timestamp", Query.Direction.DESCENDING)
-                ?.limit(10)?.orderBy("commentCount", Query.Direction.DESCENDING)?.limit(2)
-                ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
-                    contentDTOs.clear()
-                    contentUidList.clear()
-                    if (documentSnapshot == null) return@addSnapshotListener
-                    for (snapshot in documentSnapshot.documents) {
-                        var item = snapshot.toObject(ContentDTO::class.java)
-                        contentDTOs.add(item!!)
-                        contentUidList.add(snapshot.id)
-                    }
-                    notifyDataSetChanged()
-                }
-        }
-
-        inner class CustomViewHolder(val binding: ItemBestcontentBinding) :
-            RecyclerView.ViewHolder(binding.root)
-
-        override fun onCreateViewHolder(
-            parent: ViewGroup,
-            viewType: Int
-        ): HotContentRecyclerViewAdapter.CustomViewHolder {
-            val binding =
-                ItemBestcontentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            return CustomViewHolder(binding)
-        }
-
-        override fun onBindViewHolder(
-            holder: HotContentRecyclerViewAdapter.CustomViewHolder,
-            position: Int
-        ) {
-
-            holder.binding.itemBestcontentTvTitle.text = contentDTOs[position].title
-
-            holder.binding.itemBestcontentTvExplain.text = contentDTOs[position].explain
-
-            holder.binding.itemBestcontentTvUsername.text = contentDTOs[position].userName
-
-            holder.binding.itemBestcontentTvCommentcount.text =
-                contentDTOs[position].commentCount.toString()
-
-            holder.binding.itemBestcontentTvFavoritecount.text =
-                contentDTOs[position].favoriteCount.toString()
-
-            holder.binding.contentLinearLayout.setOnClickListener { v ->
-//                var intent = Intent(v.context, DetailContentActivity::class.java)
-//                if (contentDTOs[position].anonymity.containsKey(contentDTOs[position].uid)) {
-//                    intent.putExtra("destinationUsername", "익명")
-//                } else {
-//                    intent.putExtra("destinationUsername", contentDTOs[position].userName)
+    //실시간 인기글. 오류도 날 뿐더러 베스트 게시글과의 차별성 못느낌
+//    inner class HotContentRecyclerViewAdapter :
+//        RecyclerView.Adapter<HotContentRecyclerViewAdapter.CustomViewHolder>() {
+//        var contentDTOs: ArrayList<ContentDTO> = arrayListOf()
+//
+//        var contentUidList: ArrayList<String> = arrayListOf()
+//
+//        init {
+//            firestore?.collection("contents")?.orderBy("timestamp", Query.Direction.DESCENDING)
+//                ?.limit(10)?.orderBy("commentCount", Query.Direction.DESCENDING)?.limit(2)
+//                ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
+//                    contentDTOs.clear()
+//                    contentUidList.clear()
+//
+//                    if (documentSnapshot == null) return@addSnapshotListener
+//                    for (snapshot in documentSnapshot.documents) {
+//                        var item = snapshot.toObject(ContentDTO::class.java)
+//                        contentDTOs.add(item!!)
+//                        contentUidList.add(snapshot.id)
+//                    }
+//                    notifyDataSetChanged()
 //                }
-//                intent.putExtra("destinationTitle", contentDTOs[position].title)
-//                intent.putExtra("destinationExplain", contentDTOs[position].explain)
+//
+//        }
+//
+//        inner class CustomViewHolder(val binding: ItemBestcontentBinding) :
+//            RecyclerView.ViewHolder(binding.root)
+//
+//        override fun onCreateViewHolder(
+//            parent: ViewGroup,
+//            viewType: Int
+//        ): HotContentRecyclerViewAdapter.CustomViewHolder {
+//            val binding =
+//                ItemBestcontentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+//            return CustomViewHolder(binding)
+//        }
+//
+//        override fun onBindViewHolder(
+//            holder: HotContentRecyclerViewAdapter.CustomViewHolder,
+//            position: Int
+//        ) {
+//            val safePosition = holder.adapterPosition
+//            holder.binding.itemBestcontentTvTitle.text = contentDTOs[safePosition].title
+//
+//            holder.binding.itemBestcontentTvExplain.text = contentDTOs[safePosition].explain
+//
+//            holder.binding.itemBestcontentTvUsername.text = contentDTOs[safePosition].userName
+//
+//            holder.binding.itemBestcontentTvCommentcount.text =
+//                contentDTOs[safePosition].commentCount.toString()
+//
+//            holder.binding.itemBestcontentTvFavoritecount.text =
+//                contentDTOs[safePosition].favoriteCount.toString()
+//
+//            holder.binding.contentLinearLayout.setOnClickListener { v ->
+//                var intent = Intent(v.context, DetailContentActivity::class.java)
+////                if (contentDTOs[safePosition].anonymity.containsKey(contentDTOs[safePosition].uid)) {
+////                    intent.putExtra("destinationUsername", "익명")
+////                } else {
+////                    intent.putExtra("destinationUsername", contentDTOs[safePosition].userName)
+////                }
+//                intent.putExtra("destinationTitle", contentDTOs[safePosition].title)
+//                intent.putExtra("destinationExplain", contentDTOs[safePosition].explain)
 //                intent.putExtra(
 //                    "destinationTimestamp",
-//                    SimpleDateFormat("MM/dd HH:mm").format(contentDTOs[position].timestamp)
+//                    SimpleDateFormat("MM/dd HH:mm").format(contentDTOs[safePosition].timestamp)
 //                )
 //                intent.putExtra(
 //                    "destinationCommentCount",
-//                    contentDTOs[position].commentCount.toString()
+//                    contentDTOs[safePosition].commentCount.toString()
 //                )
 //                intent.putExtra(
 //                    "destinationFavoriteCount",
-//                    contentDTOs[position].favoriteCount.toString()
+//                    contentDTOs[safePosition].favoriteCount.toString()
 //                )
-//                intent.putExtra("destinationUid", contentDTOs[position].uid)
-//                intent.putExtra("destinationUid", contentDTOs[position].uid)
-//
+//                intent.putExtra("destinationUid", contentDTOs[safePosition].uid)
+//                intent.putExtra("contentUid", contentUidList[safePosition])
 //                startActivity(intent)
-
-                var intent = Intent(v.context, BoardContentActivity::class.java)
-                intent.putExtra("destinationCategory", contentDTOs[position].contentCategory)
-                startActivity(intent)
-            }
-
-        }
-
-        override fun getItemCount(): Int {
-            return contentDTOs.size
-        }
-
-    }
+//            }
+//        }
+//
+//        override fun getItemCount(): Int {
+//            return contentDTOs.size
+//        }
+//
+//    }
 
 
-    inner class BestContentRecyclerViewAdapter :
+    inner class BestContentRecyclerViewAdapter() :
         RecyclerView.Adapter<BestContentRecyclerViewAdapter.CustomViewHolder>() {
         var contentDTOs: ArrayList<ContentDTO> = arrayListOf()
 
@@ -420,11 +412,11 @@ class DetailViewFragment : Fragment() {
 
             holder.binding.contentLinearLayout.setOnClickListener { v ->
                 var intent = Intent(v.context, DetailContentActivity::class.java)
-                if (contentDTOs[safePosition].anonymity.containsKey(contentDTOs[safePosition].uid)) {
-                    intent.putExtra("destinationUsername", "익명")
-                } else {
-                    intent.putExtra("destinationUsername", contentDTOs[safePosition].userName)
-                }
+//                if (contentDTOs[safePosition].anonymity.containsKey(contentDTOs[safePosition].uid)) {
+//                    intent.putExtra("destinationUsername", "익명")
+//                } else {
+//                    intent.putExtra("destinationUsername", contentDTOs[safePosition].userName)
+//                }
                 intent.putExtra("destinationTitle", contentDTOs[safePosition].title)
                 intent.putExtra("destinationExplain", contentDTOs[safePosition].explain)
                 intent.putExtra(
@@ -524,10 +516,6 @@ class DetailViewFragment : Fragment() {
         var contentDTOs: ArrayList<ContentDTO> = arrayListOf()
 
         init {
-            firestore?.collection("users")?.document(currentUserUid!!)
-                ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
-                    if (documentSnapshot == null) return@addSnapshotListener
-                    var regionDTO = documentSnapshot.toObject(UserDTO::class.java)
                     firestore?.collection("contents")
                         ?.whereEqualTo("contentCategory", "동호회 홍보")
                         ?.orderBy("timestamp")?.limit(3)
@@ -540,7 +528,7 @@ class DetailViewFragment : Fragment() {
                             }
                             notifyDataSetChanged()
                         }
-                }
+
         }
 
         inner class CustomViewHolder(val binding: ItemBestcontentBinding) :
@@ -631,8 +619,29 @@ class DetailViewFragment : Fragment() {
 
     }
 
-    inner class ViewPagerSecondAdapter :
+    inner class ViewPagerSecondAdapter(regionItem: String?) :
         RecyclerView.Adapter<ViewPagerSecondAdapter.CustomViewHolder>() {
+
+        var contentDTOs: ArrayList<SlideDTO> = arrayListOf()
+
+        init {
+            println(TAG + 2 + regionItem)
+            firestore?.collection("slides")?.whereEqualTo("region", regionItem)
+                ?.whereEqualTo("kind", 1)
+                ?.orderBy("timestamp", Query.Direction.DESCENDING)
+                ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                    if (querySnapshot == null) return@addSnapshotListener
+                    contentDTOs.clear()
+
+                    for (snapshot in querySnapshot.documents) {
+                        var item = snapshot.toObject(SlideDTO::class.java)
+                        contentDTOs.add(item!!)
+                    }
+                    notifyDataSetChanged()
+                }
+
+        }
+
         var itemDTO: ArrayList<Int> =
             arrayListOf(
                 R.drawable.event_first,
@@ -670,21 +679,49 @@ class DetailViewFragment : Fragment() {
             holder: ViewPagerSecondAdapter.CustomViewHolder,
             position: Int
         ) {
-            holder.binding.imgPager.setImageResource(itemDTO[position])
+//            holder.binding.imgPager.setImageResource(itemDTO[position])
+//
+//            holder.binding.pagerTvTitle.text = titleDTO[position]
+//
+//            holder.binding.pagerTvContent.text = contentDTO[position]
 
-            holder.binding.pagerTvTitle.text = titleDTO[position]
+            Glide.with(this@DetailViewFragment).load(contentDTOs[position].url)
+                .into(holder.binding.imgPager)
 
-            holder.binding.pagerTvContent.text = contentDTO[position]
+            holder.binding.pagerTvTitle.text = contentDTOs[position].title
+
+            holder.binding.pagerTvContent.text = contentDTOs[position].explain
         }
 
         override fun getItemCount(): Int {
-            return itemDTO.size
+            return contentDTOs.size
         }
 
     }
 
-    inner class ViewPagerThirdAdapter :
+    inner class ViewPagerThirdAdapter(regionItem: String?) :
         RecyclerView.Adapter<ViewPagerThirdAdapter.CustomViewHolder>() {
+        var contentDTOs: ArrayList<SlideDTO> = arrayListOf()
+
+        init {
+
+            firestore?.collection("slides")?.whereEqualTo("region", regionItem)
+                ?.whereEqualTo("kind", 2)
+                ?.orderBy("timestamp", Query.Direction.DESCENDING)
+                ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                    if (querySnapshot == null) return@addSnapshotListener
+                    contentDTOs.clear()
+
+                    for (snapshot in querySnapshot.documents) {
+                        var item = snapshot.toObject(SlideDTO::class.java)
+                        contentDTOs.add(item!!)
+                    }
+                    notifyDataSetChanged()
+                }
+
+
+        }
+
         var itemDTO: ArrayList<Int> = arrayListOf(
             R.drawable.welfare_first,
             R.drawable.welfare_second,
@@ -697,7 +734,7 @@ class DetailViewFragment : Fragment() {
                 "서울대학교 간호대학교 학생들과 함께하는 건강관리교실 다소니"
             )
 
-        inner class CustomViewHolder(val binding: ItemPagerBinding) :
+        inner class CustomViewHolder(val binding: ItemPagerSecondBinding) :
             RecyclerView.ViewHolder(binding.root)
 
         override fun onCreateViewHolder(
@@ -705,7 +742,7 @@ class DetailViewFragment : Fragment() {
             viewType: Int
         ): ViewPagerThirdAdapter.CustomViewHolder {
             val binding =
-                ItemPagerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                ItemPagerSecondBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return CustomViewHolder(binding)
         }
 
@@ -713,15 +750,21 @@ class DetailViewFragment : Fragment() {
             holder: ViewPagerThirdAdapter.CustomViewHolder,
             position: Int
         ) {
-            holder.binding.imgPager.setImageResource(itemDTO[position])
+//            holder.binding.imgPager.setImageResource(itemDTO[position])
+//
+//            holder.binding.pagerTvTitle.text = titleDTO[position]
+//
 
-            holder.binding.pagerTvTitle.text = titleDTO[position]
+            Glide.with(this@DetailViewFragment).load(contentDTOs[position].url)
+                .into(holder.binding.imgPager)
 
-            holder.binding.pagerTvContent.visibility = View.GONE
+            holder.binding.pagerTvTitle.text = contentDTOs[position].title
+
+
         }
 
         override fun getItemCount(): Int {
-            return itemDTO.size
+            return contentDTOs.size
         }
 
     }

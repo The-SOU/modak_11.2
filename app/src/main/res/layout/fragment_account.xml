@@ -327,6 +327,47 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/account_division_color"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/account_layout_administrator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/account_btn_slide"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/spanner" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/toolbar_division"
+                        android:layout_marginLeft="10dp"
+                        android:text="슬라이드 넣기"
+                        android:textColor="@color/black"
+                        android:textSize="25sp"
+                        android:fontFamily="@font/spoqahansansneo_regular" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
         </LinearLayout>
 
 

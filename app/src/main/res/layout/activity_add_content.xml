@@ -98,33 +98,34 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:id="@+id/addcontent_linear_anonymity"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+<!--        익명버튼 지금 사용 하지 않음 -->
+<!--        <LinearLayout-->
+<!--            android:id="@+id/addcontent_linear_anonymity"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_marginRight="15dp"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:orientation="horizontal">-->
 
-            <ImageView
-                android:id="@+id/addcontent_imageview_anonymity_"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_unanonymity" />
+<!--            <ImageView-->
+<!--                android:id="@+id/addcontent_imageview_anonymity_"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:src="@drawable/ic_unanonymity" />-->
 
-            <TextView
-                android:id="@+id/addcontent_tv_anonymity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="익명"
-                android:textColor="@color/whitegrey"
-                android:textSize="25sp"
-                android:fontFamily="@font/spoqahansansneo_medium"/>
+<!--            <TextView-->
+<!--                android:id="@+id/addcontent_tv_anonymity"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="5dp"-->
+<!--                android:text="익명"-->
+<!--                android:textColor="@color/whitegrey"-->
+<!--                android:textSize="25sp"-->
+<!--                android:fontFamily="@font/spoqahansansneo_medium"/>-->
 
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
 
     </RelativeLayout>
