@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.modaktestone">
+    package="com.modak.modaktestone">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".kakao.GlobalApplication"
+        android:name="com.modak.modaktestone.kakao.GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_final"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_final_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".navigation.administrator.UploadSlideActivity"></activity>
-        <activity android:name=".navigation.SearchTestActivity" />
-        <activity android:name=".navigation.SearchViewActivity" />
+        <activity android:name="com.modak.modaktestone.navigation.administrator.UploadSlideActivity"></activity>
+        <activity android:name="com.modak.modaktestone.navigation.SearchTestActivity" />
+        <activity android:name="com.modak.modaktestone.navigation.SearchViewActivity" />
         <activity
-            android:name=".navigation.CreateNameActivity"
+            android:name="com.modak.modaktestone.navigation.CreateNameActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".navigation.WelfareNoticeActivity"
+            android:name="com.modak.modaktestone.navigation.WelfareNoticeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.account.AddInquiryActivity"
+            android:name="com.modak.modaktestone.navigation.account.AddInquiryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.account.MyInquiryActivity"
+            android:name="com.modak.modaktestone.navigation.account.MyInquiryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.LaunchActivity"
+            android:name="com.modak.modaktestone.navigation.LaunchActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,60 +39,60 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".navigation.account.NoticeDetailActivity"
+            android:name="com.modak.modaktestone.navigation.account.NoticeDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.account.NoticeActivity"
+            android:name="com.modak.modaktestone.navigation.account.NoticeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.administrator.UploadNoticeActivity"
+            android:name="com.modak.modaktestone.navigation.administrator.UploadNoticeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.account.MyFavoriteActivity"
+            android:name="com.modak.modaktestone.navigation.account.MyFavoriteActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.account.MyCommentActivity"
+            android:name="com.modak.modaktestone.navigation.account.MyCommentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.account.MyContentActivity"
+            android:name="com.modak.modaktestone.navigation.account.MyContentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.PhoneCertificationActivity"
+            android:name="com.modak.modaktestone.navigation.PhoneCertificationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.HomeRegionActivity"
+            android:name="com.modak.modaktestone.navigation.HomeRegionActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.HomePageViewActivity"
+            android:name="com.modak.modaktestone.navigation.HomePageViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.InputActivity"
+            android:name="com.modak.modaktestone.navigation.InputActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.ReportViewActivity"
+            android:name="com.modak.modaktestone.navigation.ReportViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.DetailContentActivity"
+            android:name="com.modak.modaktestone.navigation.DetailContentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.AddContentActivity"
+            android:name="com.modak.modaktestone.navigation.AddContentActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".navigation.EditContentActivity"
+            android:name="com.modak.modaktestone.navigation.EditContentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.BoardContentActivity"
+            android:name="com.modak.modaktestone.navigation.BoardContentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".navigation.SelectRegionActivity"
+            android:name="com.modak.modaktestone.navigation.SelectRegionActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.modak.modaktestone.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.modak.modaktestone.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.example.modaktestone" />
@@ -118,7 +118,7 @@
         <!-- <meta-data -->
         <!-- android:name="com.google.firebase.messaging.default_notification_color" -->
         <!-- android:resource="@color/dots_color" /> -->
-        <service android:name=".navigation.util.FCMService">
+        <service android:name="com.modak.modaktestone.navigation.util.FCMService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

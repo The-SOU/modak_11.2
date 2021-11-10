@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "553249594887",
+    "firebase_url": "https://modaktestone-default-rtdb.firebaseio.com",
     "project_id": "modaktestone",
     "storage_bucket": "modaktestone.appspot.com"
   },
@@ -13,6 +14,83 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "553249594887-8r34umr2g5ll107s94rskbca1qi7mkmq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.modak.modaktestone",
+            "certificate_hash": "e1937b1dfdd5c2544adbbc74c6dbedd78c49e1b9"
+          }
+        },
+        {
+          "client_id": "553249594887-cv861md2ctlbhhpn4p9cbc02iohb6111.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.modak.modaktestone",
+            "certificate_hash": "b6263309d1e13a93cfc4e9135df9d873c87e1165"
+          }
+        },
+        {
+          "client_id": "553249594887-tghe60lc3ekpnqsd20jrohvsdeai0hev.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.modak.modaktestone",
+            "certificate_hash": "082e37c0a6f42811affefaa26cb2aec2ed43177c"
+          }
+        },
+        {
+          "client_id": "553249594887-2ce5tsbvltkrrfm2mt7tofr8ks7048ar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjJ33rFU9BeLjd8YemvPZrz0b1P6qs_o4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553249594887-2ce5tsbvltkrrfm2mt7tofr8ks7048ar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553249594887:android:47c5485f9f10ac279f54a2",
+        "android_client_info": {
+          "package_name": "com.modak.modaktestone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553249594887-dus14fhpg1mdet12g36niesi38ut88le.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.modak.modaktestone",
+            "certificate_hash": "e1937b1dfdd5c2544adbbc74c6dbedd78c49e1b9"
+          }
+        },
+        {
+          "client_id": "553249594887-m2pfgud19chnhfqi1r4kclqj6bqdvvei.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.modak.modaktestone",
+            "certificate_hash": "b6263309d1e13a93cfc4e9135df9d873c87e1165"
+          }
+        },
+        {
+          "client_id": "553249594887-me1atuv2bu9es2g9bddidp6fmch9ut6j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.modak.modaktestone",
+            "certificate_hash": "082e37c0a6f42811affefaa26cb2aec2ed43177c"
+          }
+        },
         {
           "client_id": "553249594887-2ce5tsbvltkrrfm2mt7tofr8ks7048ar.apps.googleusercontent.com",
           "client_type": 3
